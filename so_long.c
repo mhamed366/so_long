@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:38 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 19:07:00 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:41:00 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ int main(int ac, char **av)
 		return (0);
 	}
 	set_vars(&map, &player, &collectibles, &exits);
-	parse_map(av[1], &map);
+	if (parse_map(av[1], &map) != OK)
+	{
+		write(1, "Error\n", 6);
+		return (0);
+	}
 	printf("check map: %d",check_map(&map, &player, &collectibles, &exits));
 	printf("check comp: %d",check_components(&map, &player, &collectibles, &exits));
-	// mlx.mlx = mlx_init();
-	// mlx.mlx_win = mlx_new_window(mlx.mlx, 1920, 1080, "Hello");
-	// mlx_loop_hook(mlx.mlx, animate, &mlx);
-	// mlx_loop(mlx.mlx);
+	draw(&mlx, &map, &player, &collectibles, &exits);
+	
 	// printf("%d\n", map.height);
 	// for (int i=0;i<map.height;i++)
 	// 	printf("%s\n",map.map[i]);

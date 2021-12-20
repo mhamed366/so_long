@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:10:25 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 18:53:01 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:49:38 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define INVALID_EXIT -5
 # define INVALID_COLLECTIBLE -5
 # define MAP_NOT_CLOSED -6
+# define INVALID_EXT -7
 # define OK 1
 
 typedef struct mlx {
@@ -47,6 +48,14 @@ typedef struct map {
 	int	height;
 	int	width;
 	char **map;
+	void *wall_d;
+	void *wall_dl;
+	void *wall_dr;
+	void *wall_l;
+	void *wall_r;
+	void *wall_u;
+	void *wall_ul;
+	void *wall_ur;
 } t_map;
 
 typedef struct player {
@@ -61,12 +70,14 @@ typedef struct collectibles {
 	int	*pos_x;
 	int	*pos_y;
 	int	collected;
+	void *img;
 } t_collectibles;
 
 typedef struct exits {
 	int	count;
 	int	*pos_x;
 	int	*pos_y;
+	void *img;
 } t_exits;
 
 typedef struct counter
@@ -85,5 +96,6 @@ int		parse_map(char *file, t_map *map);
 int		check_map(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 int		store_positions(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 int		check_components(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
+void	draw(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 
 #endif

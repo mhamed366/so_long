@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:30:00 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/19 21:22:54 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:16:08 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				get_next_line(int fd, char **line)
 		if (*(cache[fd] + i) != '\n')
 			*line = join_char(line, (cache[fd] + i), &i);
 	}
-	cache[fd] = ft_memccpy(cache[fd], (cache[fd] + i + 1), '\n',
+	cache[fd] = ft_ft_memccpy(cache[fd], (cache[fd] + i + 1), '\n',
 			ft_strlen(cache[fd]));
 	if (r <= 0 || (cache[0] == NULL && *line[0] == '\0' && r == 0))
 	{

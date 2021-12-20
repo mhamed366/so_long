@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 19:43:34 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 18:58:28 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:20:44 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ int	parse_map(char *file, t_map *map)
 {
 	int i;
 
+	if (ft_strncmp(".ber", ft_strrchr(file, '.'), 4))
+		return (INVALID_EXT);
 	map->fd = open(file, O_RDONLY);
-	map->height = lines_count(file);
-	
+	map->height = lines_count(file);	
 	map->map = (char **)malloc(sizeof(char *) * map->height + 1);
 	if (!map->map)
 		return (ALLOCATION_ERROR);

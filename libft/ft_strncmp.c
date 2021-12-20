@@ -6,17 +6,19 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 23:08:26 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/11/15 23:39:07 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:24:43 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
 	i = 0;
+	if (ft_strlen(s1) < n || ft_strlen(s2) < n)
+		return (-1);
 	while (n-- && (s1[i] != '\0' || s2[i] != '\0'))
 	{
 		if (s1[i] != s2[i])

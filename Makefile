@@ -3,6 +3,7 @@ SRC =	so_long.c $(SRCS)
 
 SRCS = 	SRCS/parse_map.c\
 		SRCS/store_positions.c\
+		SRCS/draw.c\
 		SRCS/check_map.c\
 		SRCS/check_components.c\
 		gnl/get_next_line.o\

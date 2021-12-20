@@ -6,13 +6,13 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:30:38 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/19 21:48:52 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:16:23 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void		*ft_memccpy(void *dst, const void *src, int c, int n)
+void		*ft_ft_memccpy(void *dst, const void *src, int c, int n)
 {
 	unsigned char	*src1;
 	unsigned char	*dst1;
@@ -31,7 +31,7 @@ void		*ft_memccpy(void *dst, const void *src, int c, int n)
 	return (dst1);
 }
 
-int			ft_strlcpy(char *dst, const char *src, int c)
+int			ft_ft_strlcpy(char *dst, const char *src, int c)
 {
 	int i;
 
