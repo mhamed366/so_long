@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:10:25 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 21:49:38 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/21 22:01:30 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ typedef struct mlx {
 	int width;
 } t_mlx;
 
+typedef struct images {
+	void *wall_dr;
+	void *wall_l;
+	void *wall_r;
+	void *wall_u;
+	void *wall_ul;
+	void *wall_ur;
+	void *wall_d;
+	void *wall_dl;
+	void *player;
+	void *collectible;
+	void *exit;
+} t_images;
+
+t_images images;
+
 typedef struct map {
 	int	walls_count;
 	int	empty_count;
@@ -48,14 +64,6 @@ typedef struct map {
 	int	height;
 	int	width;
 	char **map;
-	void *wall_d;
-	void *wall_dl;
-	void *wall_dr;
-	void *wall_l;
-	void *wall_r;
-	void *wall_u;
-	void *wall_ul;
-	void *wall_ur;
 } t_map;
 
 typedef struct player {
