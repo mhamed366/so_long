@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:10:25 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/21 22:01:30 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:59:07 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct images {
 	void *wall_ur;
 	void *wall_d;
 	void *wall_dl;
+	void *wall_01;
+	void *wall_02;
 	void *player;
 	void *collectible;
 	void *exit;
@@ -99,11 +101,23 @@ typedef struct counter
 	int count_collectible;
 } t_counter;
 
+typedef struct all
+{
+	t_player *player;
+	t_collectibles *collectibles;
+	t_map *map;
+	t_exits *exits;
+	t_mlx *mlx;
+}	t_all;
 
 int		parse_map(char *file, t_map *map);
+int		move(int keycode, t_all *player_collectibles);
 int		check_map(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 int		store_positions(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 int		check_components(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 void	draw(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
+void	draw_WEC(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
+void	draw_player(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
+void	draw_lim(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 
 #endif

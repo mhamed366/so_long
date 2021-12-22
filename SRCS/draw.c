@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:34:22 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/21 22:03:30 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:11:43 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ void	set_images(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collec
 	images.wall_ur = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_ur.xpm", &mlx->width, &mlx->height);
 	images.wall_d = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_d.xpm", &mlx->width, &mlx->height);
 	images.wall_dl = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_dl.xpm", &mlx->width, &mlx->height);
+	images.wall_01 = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_01.xpm", &mlx->width, &mlx->height);
+	images.wall_02 = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_02.xpm", &mlx->width, &mlx->height);
 	images.player = mlx_xpm_file_to_image(mlx->mlx, "./sprites/player_01.xpm", &mlx->width, &mlx->height);
 	images.exit = mlx_xpm_file_to_image(mlx->mlx, "./sprites/door_01.xpm", &mlx->width, &mlx->height);
-	images.collectible = mlx_xpm_file_to_image(mlx->mlx, "./sprites/plant_02.xpm", &mlx->width, &mlx->height);
+	images.collectible = mlx_xpm_file_to_image(mlx->mlx, "./sprites/plant_03.xpm", &mlx->width, &mlx->height);
 }
 
 void	draw_lim(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
@@ -58,19 +60,47 @@ void	draw_lim(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collecti
 	}
 }
 
+void	draw_WEC(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+{
+	char *s;
+	t_counter counter;
+
+	s = ft_itoa(collectibles->collected);
+	mlx_string_put(mlx->mlx, mlx->mlx_win, 64, 10, 0xFFFFFF, s);
+	free(s);
+	counter.i = -1;
+	while (++counter.i < map->walls_count)
+		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, images.wall_02, map->walls_x[counter.i] * 64, map->walls_y[counter.i] * 64);
+	counter.i = -1;
+	while (++counter.i < exits->count)
+		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, images.exit, exits->pos_x[counter.i] * 64, exits->pos_y[counter.i] * 64);
+	counter.i = -1;
+	while (++counter.i < collectibles->count)
+		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, images.collectible, collectibles->pos_x[counter.i] * 64, collectibles->pos_y[counter.i] * 64);
+}
+
 void	draw_player(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
 {
-	printf("%d %d\n", player->pos_x, player->pos_y);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, images.player, player->pos_x * 64, player->pos_y * 64);
 }
 
 void	draw(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
 {
+	t_all all;
+
 	mlx->mlx = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx, map->width * 64, map->height * 64, "SO_LONG");
 	set_images(mlx, map, player, collectibles, exits);
 	draw_lim(mlx, map, player, collectibles, exits);
 	draw_player(mlx, map, player, collectibles, exits);
+	draw_WEC(mlx, map, player, collectibles, exits);
+	all.player = player;
+	all.collectibles = collectibles;
+	all.exits = exits;
+	all.map = map;
+	all.mlx = mlx;
+	mlx_hook(mlx->mlx_win, 02, 1L<<0, move, &all);
+	// mlx_hook(mlx->mlx_win, move, &player_collectibles);
 	// player->img = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_dr.xpm", &mlx->width, &mlx->height);
 	// mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, images.wall_dr, 0, 0);
 	// mlx_loop_hook(mlx.mlx, animate, &mlx);

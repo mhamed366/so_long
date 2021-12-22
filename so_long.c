@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:38 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 21:41:00 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:12:21 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	set_vars(t_map *map, t_player *player, t_collectibles *collectibles, t_exit
 	map->walls_count = 0;
 	player->count = 0;
 	collectibles->count = 0;
+	collectibles->collected = 0;
 	exits->count = 0;
 }
 

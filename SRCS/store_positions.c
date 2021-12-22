@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:08:07 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/21 21:59:35 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:21:36 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	count_components(t_map *map, t_player *player, t_collectibles *collectibles
 	int	i;
 	int	j;
 
-	i = -1;
+	i = 0;
 	// printf("height: %d\n",map->height);
-	while (++i < map->height)
+	while (++i < map->height - 1)
 	{
-		j = -1;
-		while (++j < map->width)
+		j = 0;
+		while (++j < map->width - 1)
 		{
 			if (map->map[i][j] == 'C')
 				collectibles->count++;
@@ -68,12 +68,12 @@ void	store_pos(t_map *map, t_player *player, t_collectibles *collectibles, t_exi
 	counter.count_empty = 0;
 	counter.count_collectible = 0;
 	counter.count_exit = 0;
-	counter.i = -1;
+	counter.i = 0;
 	
-	while (++counter.i < map->height)
+	while (++counter.i < map->height - 1)
 	{
-		counter.j = -1;
-		while (++counter.j < map->width)
+		counter.j = 0;
+		while (++counter.j < map->width - 1)
 		{
 			if (map->map[counter.i][counter.j] == 'C')
 			{
