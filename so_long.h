@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:10:25 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/22 20:59:07 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:26:50 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int		check_map(t_map *map, t_player *player, t_collectibles *collectibles, t_exi
 int		store_positions(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 int		check_components(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
 void	draw(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
-void	draw_WEC(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
-void	draw_player(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
-void	draw_lim(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits);
+void	draw_WEC(t_mlx *mlx, t_map *map, t_collectibles *collectibles, t_exits *exits);
+void	draw_player(t_mlx *mlx, t_player *player);
+void	draw_lim(t_mlx *mlx, t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:38 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/22 21:12:21 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:18:19 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,4 @@ int main(int ac, char **av)
 	printf("check map: %d",check_map(&map, &player, &collectibles, &exits));
 	printf("check comp: %d",check_components(&map, &player, &collectibles, &exits));
 	draw(&mlx, &map, &player, &collectibles, &exits);
-	
-	// printf("%d\n", map.height);
-	// for (int i=0;i<map.height;i++)
-	// 	printf("%s\n",map.map[i]);
-	// for (int i=0;i<map.height;i++)
-	// 	free(map.map[i]);
-	// for (int i =0;i<exits.count;i++)
-	// 	printf("%d ", exits.pos_x[i]);
-	// printf("\n");
-	// for (int i =0;i<exits.count;i++)
-	// 	printf("%d ", exits.pos_y[i]);
-	// printf("\n");
-	// printf("%d %d",player.pos_x,player.pos_y);
-	// printf("collectibles : %d\nexits : %d\nwalls : %d\nempty : %d\n",collectibles.count,exits.count,map.walls_count,map.empty_count);
-	// while(1);
 }

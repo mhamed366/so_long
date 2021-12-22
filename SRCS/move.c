@@ -6,13 +6,13 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 20:32:20 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/22 21:33:23 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:29:08 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	on_collectibe(int keycode, t_all *all)
+void	on_collectibe(t_all *all)
 {
 	t_counter counter;
 
@@ -29,7 +29,7 @@ void	on_collectibe(int keycode, t_all *all)
 	}
 }
 
-int	on_exit(int keycode, t_all *all)
+int	on_exit(t_all *all)
 {
 	t_counter counter;
 
@@ -67,17 +67,17 @@ void	key_events(int keycode, t_all *all)
 		exit(1);
 	}
 }
-// 13 0 1 2
+
 int	move(int keycode, t_all *all)
 {
 	key_events(keycode, all);
-	on_collectibe(keycode, all);
-	if (!on_exit(keycode, all))
+	on_collectibe(all);
+	if (!on_exit(all))
 	{
 		mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
-		draw_WEC(all->mlx, all->map, all->player, all->collectibles, all->exits);
-		draw_player(all->mlx, all->map, all->player, all->collectibles, all->exits);
-		draw_lim(all->mlx, all->map, all->player, all->collectibles, all->exits);
+		draw_WEC(all->mlx, all->map, all->collectibles, all->exits);
+		draw_player(all->mlx, all->player);
+		draw_lim(all->mlx, all->map);
 	}
 	
 	return (1);

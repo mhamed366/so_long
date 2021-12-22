@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:08:07 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/22 20:21:36 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:22:50 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	count_components(t_map *map, t_player *player, t_collectibles *collectibles
 */
 int	allocate_pos(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
 {
+	(void) player;
 	map->empty_x = (int *)malloc(sizeof(int) * map->empty_count);
 	map->empty_y = (int *)malloc(sizeof(int) * map->empty_count);
 	map->walls_y = (int *)malloc(sizeof(int) * map->walls_count);
@@ -111,7 +112,6 @@ int	store_positions(t_map *map, t_player *player, t_collectibles *collectibles, 
 	// int	j;
 
 	i = -1;
-
 	count_components(map, player, collectibles, exits);
 	if (!allocate_pos(map, player, collectibles, exits))
 		return (ALLOCATION_ERROR);

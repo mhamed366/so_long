@@ -6,13 +6,13 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:34:22 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/22 21:11:43 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/22 23:26:31 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	set_images(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+void	set_images(t_mlx *mlx)
 {
 	images.wall_dr = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_dr.xpm", &mlx->width, &mlx->height);
 	images.wall_l = mlx_xpm_file_to_image(mlx->mlx, "./sprites/wall_l.xpm", &mlx->width, &mlx->height);
@@ -29,7 +29,7 @@ void	set_images(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collec
 	images.collectible = mlx_xpm_file_to_image(mlx->mlx, "./sprites/plant_03.xpm", &mlx->width, &mlx->height);
 }
 
-void	draw_lim(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+void	draw_lim(t_mlx *mlx, t_map *map)
 {
 	t_counter counter;
 
@@ -60,7 +60,7 @@ void	draw_lim(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collecti
 	}
 }
 
-void	draw_WEC(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+void	draw_WEC(t_mlx *mlx, t_map *map, t_collectibles *collectibles, t_exits *exits)
 {
 	char *s;
 	t_counter counter;
@@ -79,7 +79,7 @@ void	draw_WEC(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collecti
 		mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, images.collectible, collectibles->pos_x[counter.i] * 64, collectibles->pos_y[counter.i] * 64);
 }
 
-void	draw_player(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+void	draw_player(t_mlx *mlx, t_player *player)
 {
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, images.player, player->pos_x * 64, player->pos_y * 64);
 }
@@ -90,10 +90,10 @@ void	draw(t_mlx *mlx, t_map *map, t_player *player, t_collectibles *collectibles
 
 	mlx->mlx = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx, map->width * 64, map->height * 64, "SO_LONG");
-	set_images(mlx, map, player, collectibles, exits);
-	draw_lim(mlx, map, player, collectibles, exits);
-	draw_player(mlx, map, player, collectibles, exits);
-	draw_WEC(mlx, map, player, collectibles, exits);
+	set_images(mlx);
+	draw_lim(mlx, map);
+	draw_player(mlx, player);
+	draw_WEC(mlx, map, collectibles, exits);
 	all.player = player;
 	all.collectibles = collectibles;
 	all.exits = exits;

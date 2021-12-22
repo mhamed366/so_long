@@ -15,8 +15,7 @@ libft_bin = libft/libft.a
 OBJ = $(SRC:.c=.o)
 OBJSLIBFT = $(wildcard libft/*.o)
 CC = gcc
-CFLAGS = 
-#-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 all : makelibft makeMlx makeGNL $(NAME)
 
@@ -34,9 +33,12 @@ $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(libft_bin) -lmlx -framework OpenGl -framework Appkit -lz mlx/libmlx.a
 
 cleanLibft :
-	@if [ -n "$(OBJSLIBFT)" ]; then rm -rf $(OBJSLIBFT); fi
+	make clean -C libft/
 
-clean : cleanLibft
+cleanMlx :
+	make clean -C mlx/
+
+clean : cleanLibft cleanMlx
 	@rm -rf $(OBJ)
 	@echo "Done"
 
@@ -44,4 +46,5 @@ re : fclean all
 
 fclean : clean
 	@rm -rf libft/libft.a
-	@rm -rf $(NAME)
+	make fclean -C mlx/
+	make fclean -C libft/
