@@ -3,6 +3,7 @@ SRC =	so_long.c $(SRCS)
 
 SRCS = 	SRCS/parse_map.c\
 		SRCS/store_positions.c\
+		SRCS/set_images.c\
 		SRCS/draw.c\
 		SRCS/move.c\
 		SRCS/check_map.c\
@@ -45,6 +46,5 @@ clean : cleanLibft cleanMlx
 re : fclean all
 
 fclean : clean
-	@rm -rf libft/libft.a
-	make fclean -C mlx/
-	make fclean -C libft/
+	@rm -rf $(NAME)
+	@make fclean -C libft/

@@ -6,20 +6,20 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:45:06 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 21:11:39 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 16:37:17 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	check_components(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+int	check_components(t_map *map, t_player *player,
+		t_collectibles *collectibles, t_exits *exits)
 {
-	t_counter counter;
+	t_counter	counter;
 
-	printf("count: %d\n", player->count);
 	if (player->count != 1)
 		return (INVALID_PLAYER);
-	if	(exits->count < 1)
+	if (exits->count < 1)
 		return (INVALID_EXIT);
 	if (collectibles->count < 1)
 		return (INVALID_COLLECTIBLE);

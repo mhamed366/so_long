@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 22:09:00 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 18:54:11 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 16:38:40 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 int	check_chars(char *line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < (int)ft_strlen(line))
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'C' && line[i] != 'E' && line[i] != 'P')
-		{
-			printf("char : %c\n", line[i]);
+		if (line[i] != '0' && line[i] != '1'
+			&& line[i] != 'C' && line[i] != 'E' && line[i] != 'P')
 			return (0);
-		}
 	}
-	return (1);	
+	return (1);
 }
 
 /*
@@ -34,13 +32,14 @@ int	check_chars(char *line)
 	return -3 if malloc returns NULL
 	return 1 if successful
 */
-int	check_map(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+int	check_map(t_map *map, t_player *player,
+		t_collectibles *collectibles, t_exits *exits)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = -1;
-	while(++i < map->height)
+	while (++i < map->height)
 	{
 		j = -1;
 		map->width = ft_strlen(map->map[0]);

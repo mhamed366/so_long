@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 20:32:20 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/22 23:29:08 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 16:55:37 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	on_collectibe(t_all *all)
 {
-	t_counter counter;
+	t_counter	counter;
 
 	counter.i = -1;
 	while (++counter.i < all->collectibles->count)
@@ -31,20 +31,19 @@ void	on_collectibe(t_all *all)
 
 int	on_exit(t_all *all)
 {
-	t_counter counter;
+	t_counter	counter;
 
 	counter.i = -1;
 	while (++counter.i < all->exits->count)
 	{
-		printf("exit posx, posy : %d %d\n",all->exits->pos_x[counter.i],all->exits->pos_y[counter.i]);
-		printf("player posx, posy : %d %d\n",all->player->pos_x,all->player->pos_y);
-		printf("%d %d\n", all->collectibles->collected, all->collectibles->count);
 		if (all->player->pos_x == all->exits->pos_x[counter.i]
 			&& all->player->pos_y == all->exits->pos_y[counter.i]
 			&& all->collectibles->count == all->collectibles->collected)
 		{
 			mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
-			mlx_string_put(all->mlx->mlx, all->mlx->mlx_win, (all->map->width / 2) * 64, (all->map->height / 2) * 64, 0XFFFFFF, "You Won");
+			mlx_string_put(all->mlx->mlx, all->mlx->mlx_win,
+				(all->map->width / 2) * 64, (all->map->height / 2) * 64,
+				0XFFFFFF, "You Won");
 			return (1);
 		}	
 	}
@@ -53,15 +52,19 @@ int	on_exit(t_all *all)
 
 void	key_events(int keycode, t_all *all)
 {
-	if (keycode == 13 && all->map->map[all->player->pos_y - 1][all->player->pos_x] != '1')
+	if (keycode == 13
+		&& all->map->map[all->player->pos_y - 1][all->player->pos_x] != '1')
 		all->player->pos_y--;
-	else if(keycode == 1 && all->map->map[all->player->pos_y + 1][all->player->pos_x] != '1')
+	else if (keycode == 1
+		&& all->map->map[all->player->pos_y + 1][all->player->pos_x] != '1')
 		all->player->pos_y++;
-	else if(keycode == 0 && all->map->map[all->player->pos_y][all->player->pos_x - 1] != '1')
+	else if (keycode == 0
+		&& all->map->map[all->player->pos_y][all->player->pos_x - 1] != '1')
 		all->player->pos_x--;
-	else if(keycode == 2 && all->map->map[all->player->pos_y][all->player->pos_x + 1] != '1')
+	else if (keycode == 2
+		&& all->map->map[all->player->pos_y][all->player->pos_x + 1] != '1')
 		all->player->pos_x++;
-	else if(keycode == 53)
+	else if (keycode == 53)
 	{
 		mlx_destroy_window(all->mlx->mlx, all->mlx->mlx_win);
 		exit(1);
@@ -75,10 +78,9 @@ int	move(int keycode, t_all *all)
 	if (!on_exit(all))
 	{
 		mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
-		draw_WEC(all->mlx, all->map, all->collectibles, all->exits);
+		draw_wec(all->mlx, all->map, all->collectibles, all->exits);
 		draw_player(all->mlx, all->player);
 		draw_lim(all->mlx, all->map);
 	}
-	
 	return (1);
 }

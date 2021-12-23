@@ -6,24 +6,26 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 11:30:00 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 21:16:08 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 17:10:07 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int		malloc_check(char **line, char **cache, int fd, int *r)
+static int	malloc_check(char **line, char **cache, int fd, int *r)
 {
 	if (line == NULL)
 		return (-1);
-	if (!(*line = ft_strdup("")))
+	*line = ft_strdup("");
+	if (!(*line))
 		return (-1);
 	*r = 1;
 	if (!*(cache))
 	{
 		if (fd < 0 || fd > 256)
 			return (-1);
-		if (!(*(cache) = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char))))
+		*(cache) = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!(*(cache)))
 			return (-1);
 		*r = read(fd, *(cache), BUFFER_SIZE);
 		*(cache[0] + *r) = '\0';
@@ -33,7 +35,7 @@ static int		malloc_check(char **line, char **cache, int fd, int *r)
 	return (0);
 }
 
-static int		read_cache(char **cache, int fd, int *i, int *r)
+static int	read_cache(char **cache, int fd, int *i, int *r)
 {
 	*r = read(fd, *(cache), BUFFER_SIZE);
 	*(cache[0] + *r) = '\0';
@@ -45,15 +47,22 @@ static int		read_cache(char **cache, int fd, int *i, int *r)
 	return (*r);
 }
 
-void			free_null(char **str)
+void	free_null(char **str)
 {
 	free(*str);
 	*str = NULL;
 }
 
-int				get_next_line(int fd, char **line)
+int	returnv(int r, char c)
 {
-	static char *cache[256];
+	if (r == 0 || c == '\0')
+		return (0);
+	return (-1);
+}
+
+int	get_next_line(int fd, char **line)
+{
+	static char	*cache[256];
 	int			i;
 	int			r;
 
@@ -75,7 +84,7 @@ int				get_next_line(int fd, char **line)
 	if (r <= 0 || (cache[0] == NULL && *line[0] == '\0' && r == 0))
 	{
 		free_null(&(cache[fd]));
-		return (r == 0 || *line[0] == '\0') ? 0 : -1;
+		return (returnv(r, *line[0]));
 	}
 	return (1);
 }

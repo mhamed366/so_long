@@ -6,13 +6,14 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:09:38 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/22 23:18:19 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 16:53:25 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_vars(t_map *map, t_player *player, t_collectibles *collectibles, t_exits *exits)
+void	set_vars(t_map *map, t_player *player,
+		t_collectibles *collectibles, t_exits *exits)
 {
 	map->empty_count = 0;
 	map->walls_count = 0;
@@ -22,17 +23,16 @@ void	set_vars(t_map *map, t_player *player, t_collectibles *collectibles, t_exit
 	exits->count = 0;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_mlx mlx;
-	t_map map;
-	t_player player;
-	t_collectibles collectibles;
-	t_exits exits;
-	
+	t_map			map;
+	t_player		player;
+	t_collectibles	collectibles;
+	t_exits			exits;
+
 	if (ac != 2)
 	{
-		write(1,"",5);
+		write(1, "Error\n", 5);
 		return (0);
 	}
 	set_vars(&map, &player, &collectibles, &exits);
@@ -41,7 +41,7 @@ int main(int ac, char **av)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	printf("check map: %d",check_map(&map, &player, &collectibles, &exits));
-	printf("check comp: %d",check_components(&map, &player, &collectibles, &exits));
-	draw(&mlx, &map, &player, &collectibles, &exits);
+	check_map(&map, &player, &collectibles, &exits);
+	check_components(&map, &player, &collectibles, &exits);
+	draw(&map, &player, &collectibles, &exits);
 }

@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 19:43:34 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/20 21:20:44 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 16:56:42 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	lines_count(char *file)
 {
 	int		fd;
-	int 	read_ret;
+	int		read_ret;
 	char	c;
 	int		count;
 
@@ -39,16 +39,17 @@ int	lines_count(char *file)
 
 int	parse_map(char *file, t_map *map)
 {
-	int i;
+	int	i;
 
 	if (ft_strncmp(".ber", ft_strrchr(file, '.'), 4))
 		return (INVALID_EXT);
 	map->fd = open(file, O_RDONLY);
-	map->height = lines_count(file);	
+	map->height = lines_count(file);
 	map->map = (char **)malloc(sizeof(char *) * map->height + 1);
 	if (!map->map)
 		return (ALLOCATION_ERROR);
 	i = -1;
-	while (get_next_line(map->fd, &(map->map[++i])));
+	while (get_next_line(map->fd, &(map->map[++i])))
+		continue ;
 	return (OK);
 }
