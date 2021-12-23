@@ -4,6 +4,7 @@ SRC =	so_long.c $(SRCS)
 SRCS = 	SRCS/parse_map.c\
 		SRCS/store_positions.c\
 		SRCS/set_images.c\
+		SRCS/quit_program.c\
 		SRCS/draw.c\
 		SRCS/move.c\
 		SRCS/check_map.c\
@@ -31,7 +32,7 @@ makeGNL :
 	@gcc $(CFLAGS) -c gnl/get_next_line_utils.c -o gnl/get_next_line_utils.o
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(libft_bin) -lmlx -framework OpenGl -framework Appkit -lz mlx/libmlx.a
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(libft_bin) -lmlx -framework OpenGl -framework Appkit -lz mlx/libmlx.a
 
 cleanLibft :
 	make clean -C libft/

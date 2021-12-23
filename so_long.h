@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:10:25 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/23 17:18:21 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 19:12:19 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define UNALLOWED_CHAR -3
 # define INVALID_PLAYER -4
 # define INVALID_EXIT -5
-# define INVALID_COLLECTIBLE -5
-# define MAP_NOT_CLOSED -6
-# define INVALID_EXT -7
+# define INVALID_COLLECTIBLE -6
+# define MAP_NOT_CLOSED -7
+# define INVALID_EXT -8
 # define OK 1
 
 typedef struct mlx {
@@ -66,6 +66,7 @@ typedef struct map {
 	int		fd;
 	int		height;
 	int		width;
+	int		won;
 	char	**map;
 }	t_map;
 
@@ -111,6 +112,13 @@ typedef struct all
 	t_mlx			*mlx;
 }	t_all;
 
+typedef struct errors
+{
+	int	parse_map;
+	int	check_map;
+	int	check_comp;
+}	t_errors;
+
 int		parse_map(char *file, t_map *map);
 int		move(int keycode, t_all *player_collectibles);
 int		check_map(t_map *map, t_player *player,
@@ -126,5 +134,7 @@ void	draw_wec(t_mlx *mlx, t_map *map,
 void	draw_player(t_mlx *mlx, t_player *player);
 void	draw_lim(t_mlx *mlx, t_map *map);
 void	set_images(t_mlx *mlx);
+int		quit_program(int keycode, t_all *all);
+void	free_all(t_map *map, t_collectibles *collectibles, t_exits *exits);
 
 #endif

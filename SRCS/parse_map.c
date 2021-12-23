@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 19:43:34 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/23 16:56:42 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 18:19:45 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	parse_map(char *file, t_map *map)
 	i = -1;
 	while (get_next_line(map->fd, &(map->map[++i])))
 		continue ;
+	close(map->fd);
 	return (OK);
 }

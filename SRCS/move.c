@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 20:32:20 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/23 16:55:37 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 19:14:46 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,51 @@ int	on_exit(t_all *all)
 			mlx_string_put(all->mlx->mlx, all->mlx->mlx_win,
 				(all->map->width / 2) * 64, (all->map->height / 2) * 64,
 				0XFFFFFF, "You Won");
+			all->map->won = 1;
 			return (1);
 		}	
 	}
 	return (0);
 }
 
+void	moves_count(int moves_counter)
+{
+	char	*s;
+
+	s = ft_itoa(moves_counter);
+	ft_putstr_fd("Moves count: ", 1);
+	ft_putstr_fd(s, 1);
+	ft_putstr_fd("\r", 1);
+	free(s);
+}
+
 void	key_events(int keycode, t_all *all)
 {
-	if (keycode == 13
+	static int	moves_counter;
+
+	if (keycode == 13 && !all->map->won
 		&& all->map->map[all->player->pos_y - 1][all->player->pos_x] != '1')
 		all->player->pos_y--;
-	else if (keycode == 1
+	else if (keycode == 1 && !all->map->won
 		&& all->map->map[all->player->pos_y + 1][all->player->pos_x] != '1')
 		all->player->pos_y++;
-	else if (keycode == 0
+	else if (keycode == 0 && !all->map->won
 		&& all->map->map[all->player->pos_y][all->player->pos_x - 1] != '1')
 		all->player->pos_x--;
-	else if (keycode == 2
+	else if (keycode == 2 && !all->map->won
 		&& all->map->map[all->player->pos_y][all->player->pos_x + 1] != '1')
 		all->player->pos_x++;
 	else if (keycode == 53)
 	{
+		ft_putstr_fd("\n", 1);
+		free_all(all->map, all->collectibles, all->exits);
 		mlx_destroy_window(all->mlx->mlx, all->mlx->mlx_win);
 		exit(1);
 	}
+	if (keycode == 13 || keycode == 1 || keycode == 0 || keycode == 2)
+		if (!all->map->won)
+			moves_counter++;
+	moves_count(moves_counter);
 }
 
 int	move(int keycode, t_all *all)

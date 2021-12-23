@@ -6,7 +6,7 @@
 /*   By: mkchikec <mkchikec@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:34:22 by mkchikec          #+#    #+#             */
-/*   Updated: 2021/12/23 17:17:54 by mkchikec         ###   ########.fr       */
+/*   Updated: 2021/12/23 19:12:33 by mkchikec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	draw(t_map *map, t_player *player,
 	g_mlx.mlx = mlx_init();
 	g_mlx.mlx_win = mlx_new_window(g_mlx.mlx,
 			map->width * 64, map->height * 64, "SO_LONG");
+	ft_putstr_fd("Moves count: 0\r", 1);
 	set_images(&g_mlx);
 	draw_lim(&g_mlx, map);
 	draw_player(&g_mlx, player);
@@ -101,6 +102,7 @@ void	draw(t_map *map, t_player *player,
 	all.exits = exits;
 	all.map = map;
 	all.mlx = &g_mlx;
+	mlx_hook(g_mlx.mlx_win, 17, 0, quit_program, &all);
 	mlx_hook(g_mlx.mlx_win, 02, 1L << 0, move, &all);
 	mlx_loop(g_mlx.mlx);
 }
